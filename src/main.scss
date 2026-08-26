@@ -1,0 +1,481 @@
+// Variable overrides first
+$primary: #900000;
+$accent: #C9A24B; // brass/gold accent, echoes the horn section
+$secondary: $accent;
+$enable-shadows: true;
+$enable-rounded: false;
+$enable-dark-mode: false;
+
+$font-family-base: 'Montserrat', sans-serif;
+
+@keyframes arrowAnimation {
+	0% {
+		background-position: center 0px;
+	}
+
+	50% {
+		background-position: center 30px;
+	}
+
+	100% {
+		background-position: center 0px;
+	}
+}
+
+.blackglass {
+	background-color: rgba(0, 0, 0, 0.6) !important;
+	backdrop-filter: blur(4px);
+}
+
+// Mobile browsers resize the viewport as chrome (address bar) shows/hides,
+// which makes 100vh jump/clip content. svh stays pinned to the smallest
+// (chrome-visible) viewport size instead. Falls back to vh where unsupported.
+.min-svh-100 {
+	min-height: 100vh;
+	min-height: 100svh;
+}
+
+.svh-100 {
+	height: 100vh;
+	height: 100svh;
+}
+
+a:focus-visible,
+button:focus-visible,
+.card:focus-visible {
+	outline: 2px solid $accent;
+	outline-offset: 2px;
+}
+
+.carousel-control-next-icon {
+	background: url('img/arrow_right.png') center center no-repeat !important;
+	width: 5rem !important;
+	height: 5rem !important;
+}
+
+.carousel-control-prev-icon {
+	background: url('img/arrow_right.png') center center no-repeat !important;
+	width: 5rem !important;
+	height: 5rem !important;
+	transform: rotate(180deg) !important;
+}
+
+.jkbb {
+	&.cover {
+		background-size: cover;
+		background-position: center center;
+		min-height: 100vh;
+		min-height: 100svh;
+
+		.coverheader {
+			font-weight: 700;
+			font-size: clamp(1.75rem, 4.2vw, 3.5rem);
+			line-height: 1.15;
+			letter-spacing: 0.02em;
+			text-shadow: 0px 0px 10px #000, 0 2px 4px rgba(0, 0, 0, 0.9);
+			text-transform: uppercase;
+		}
+
+		h2, .h2 {
+			font-weight: 300;
+			font-size: 1rem;
+			letter-spacing: 0.25em;
+			text-transform: uppercase;
+		}
+
+		.arrow-down {
+			position: absolute;
+			display: inline-block;
+			bottom: 0px;
+			margin: 0px;
+			padding: 0px;
+			width: 100%;
+			height: 100px;
+
+			background-image: url("img/down-arrow.png");
+			background-size: 100px 100%;
+			background-repeat: no-repeat;
+			background-position: center 0px;
+
+			animation-name: arrowAnimation;
+			animation-duration: 3s;
+			animation-iteration-count: infinite;
+			background-color: transparent;
+			border: none;
+
+			transition: background-color 0.5s ease-in-out, transform 0.2s ease-in-out;
+
+			&:hover {
+				cursor: pointer;
+				background-color: rgba(0, 0, 0, 0.2);
+				transform: scale(1.1);
+			}
+		}
+
+		&.fp {
+			background-image: url('img/jkbb_fp.jpg');
+			background-image: image-set(url('img/jkbb_fp.webp') type('image/webp'), url('img/jkbb_fp.jpg') type('image/jpeg'));
+		}
+
+		&.bio {
+			background-image: url('img/jkbb_bio.jpg');
+			background-image: image-set(url('img/jkbb_bio.webp') type('image/webp'), url('img/jkbb_bio.jpg') type('image/jpeg'));
+		}
+
+		// text already sits on a blurred, near-opaque panel here, so the global
+		// html/body text-shadow (kept for bare text over photos) is redundant
+		// and slightly muddies small captions
+		.card,
+		.blackglass,
+		.timeline-panel {
+			text-shadow: none;
+		}
+
+		.card {
+			background-color: rgba(0, 0, 0, 0.5) !important;
+			border-radius: 0.2em;
+			border: 1px solid rgba(255, 255, 255, 0.0) !important;
+			backdrop-filter: blur(4px);
+			@extend .text-light;
+			@extend .text-center;
+
+
+			&:hover {
+				text-decoration: none !important;
+				border: 1px solid #ccc !important;
+				cursor: pointer;
+			}
+		}
+
+		&.roster {
+			.card-img-top {
+				border-radius: 100%;
+				filter: grayscale(1);
+				width: 140px;
+				height: 140px;
+				object-fit: cover;
+				margin: 0 auto;
+			}
+
+			.avatar-placeholder {
+				border-radius: 100%;
+				width: 140px;
+				height: 140px;
+				margin: 0 auto;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background-color: rgba(255, 255, 255, 0.15);
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				font-size: 1.75rem;
+				font-weight: 600;
+				letter-spacing: 0.05em;
+				color: rgba(255, 255, 255, 0.85);
+			}
+
+			// keep name vertically anchored whether or not a card has an
+			// instrument caption underneath, so mixed rows stay aligned
+			.card-body {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				min-height: 5.5rem;
+			}
+
+			// names never break mid-word into two stacked lines; JS shrinks
+			// the few names too long to fit at full size, so most stay at
+			// full size and only the long ones scale down individually
+			.card-title {
+				font-size: 1.15rem;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			@media (max-width: 575.98px) {
+				.roster-section {
+					align-items: flex-start !important;
+					padding-top: 4rem;
+				}
+			}
+
+			.roster-trumpets {
+				background-image:
+					linear-gradient(to bottom,
+						rgba(0, 0, 0, 1) 0%,
+						rgba(0, 0, 0, 0) 20%),
+
+					linear-gradient(to top,
+						rgba(0, 0, 0, 1) 0%,
+						rgba(0, 0, 0, 0) 20%),
+					image-set(url('img/jkbb_roster_trumpets.webp') type('image/webp'), url('img/jkbb_roster_trumpets.jpg') type('image/jpeg')) !important;
+				background-size: cover;
+				background-position: center center;
+			}
+
+
+			.roster-trombones {
+				background-image:
+					linear-gradient(to bottom,
+						rgba(0, 0, 0, 1) 0%,
+						rgba(0, 0, 0, 0) 20%),
+
+					linear-gradient(to top,
+						rgba(0, 0, 0, 1) 0%,
+						rgba(0, 0, 0, 0) 20%),
+					image-set(url('img/jkbb_roster_trombones.webp') type('image/webp'), url('img/jkbb_roster_trombones.jpg') type('image/jpeg'));
+				background-size: cover;
+				background-position: center center;
+
+			}
+
+			.roster-sax {
+				background-image:
+					linear-gradient(to bottom,
+						rgba(0, 0, 0, 1) 0%,
+						rgba(0, 0, 0, 0) 20%),
+
+					linear-gradient(to top,
+						rgba(0, 0, 0, 1) 0%,
+						rgba(0, 0, 0, 0) 20%),
+					image-set(url('img/jkbb_roster_sax.webp') type('image/webp'), url('img/jkbb_roster_sax.jpg') type('image/jpeg'));
+				background-size: cover;
+				background-position: center center;
+
+			}
+
+
+			.roster-rythm {
+				background-image:
+					linear-gradient(to bottom,
+						rgba(0, 0, 0, 1) 0%,
+						rgba(0, 0, 0, 0) 20%),
+
+					linear-gradient(to top,
+						rgba(0, 0, 0, 1) 0%,
+						rgba(0, 0, 0, 0) 20%),
+					image-set(url('img/jkbb_roster_rythm.webp') type('image/webp'), url('img/jkbb_roster_rythm.jpg') type('image/jpeg'));
+				background-size: cover;
+				background-position: center center;
+
+			}
+
+			.roster-vox {
+				background-image:
+					linear-gradient(to bottom,
+						rgba(0, 0, 0, 1) 0%,
+						rgba(0, 0, 0, 0) 20%),
+
+					linear-gradient(to top,
+						rgba(0, 0, 0, 1) 0%,
+						rgba(0, 0, 0, 0) 20%),
+					image-set(url('img/jkbb_roster_vox.webp') type('image/webp'), url('img/jkbb_roster_vox.jpg') type('image/jpeg'));
+				background-size: cover;
+				background-position: center center;
+
+			}
+		}
+
+		&.contact {
+			background-image: url('img/jkbb_contact.png');
+			background-image: image-set(url('img/jkbb_contact.webp') type('image/webp'), url('img/jkbb_contact.png') type('image/png'));
+			background-position: center center;
+		}
+
+		&.jankonop {
+			height: auto !important;
+			background-image: url('img/jkbb_jankonop.jpg');
+			background-image: image-set(url('img/jkbb_jankonop.webp') type('image/webp'), url('img/jkbb_jankonop.jpg') type('image/jpeg'));
+
+			@extend .text-light;
+		}
+
+		&.videos {
+			video {
+				object-fit: cover !important;
+			}
+
+			.video-caption {
+				transition: opacity 0.4s ease-in-out;
+			}
+
+			.video-play-btn {
+				background: none;
+				border: none;
+				padding: 0;
+				line-height: 0;
+				transition: transform 0.15s ease-in-out;
+
+				&:hover {
+					transform: scale(1.08);
+				}
+			}
+
+			.carousel-item.is-playing .video-caption {
+				opacity: 0;
+				pointer-events: none;
+			}
+		}
+
+		&.press {
+			background-image: url('img/jkbb_press.jpg');
+			background-image: image-set(url('img/jkbb_press.webp') type('image/webp'), url('img/jkbb_press.jpg') type('image/jpeg'));
+
+			.card-img-top {
+				max-width: 200px;
+			}
+
+			.card {
+				background-color: rgba(0, 0, 0, 0.8) !important;
+				position: relative;
+
+				// this link's only job is the stretched-link ::after overlay
+				// that makes the whole card clickable; as an empty
+				// inline-block it was still sitting in the text flow between
+				// the heading and the label below, visibly shifting the
+				// label off-center and off-baseline
+				a {
+					opacity: 0;
+					position: absolute;
+					inset: 0;
+				}
+
+				// the visible focus ring lives on the opaque card, not the
+				// opacity:0 link itself, otherwise the outline would be
+				// invisible too
+				&:focus-within {
+					outline: 2px solid $accent;
+					outline-offset: 2px;
+				}
+			}
+
+			.download-label {
+				display: inline-block;
+				margin-top: 0.5rem;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				font-size: 0.9rem;
+				color: $accent;
+			}
+
+			.card:hover .download-label,
+			.card:focus-within .download-label {
+				text-decoration: underline;
+			}
+		}
+
+		&.awards {
+			background-image: url('img/jkbb_awards.jpg');
+			background-image: image-set(url('img/jkbb_awards.webp') type('image/webp'), url('img/jkbb_awards.jpg') type('image/jpeg'));
+		}
+
+		h1, h2, h3, .h1, .h2, .h3,
+		a {
+			color: #fff !important;
+			text-decoration: none !important;
+		}
+	}
+}
+
+
+.bigbtn {
+	letter-spacing: 1rem;
+	font-weight: 100 !important;
+	padding: 1rem 3rem !important;
+	color: #fff !important;
+	text-decoration: none !important;
+	background-color: rgba(0, 0, 0, 0.4) !important;
+	backdrop-filter: blur(2px);
+	text-transform: uppercase;
+	border-bottom: 0.1rem rgba(0, 0, 0, 0.0) !important;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.6) !important;
+		border-bottom: 0.1rem $accent solid !important;
+	}
+}
+
+.biotext {
+	font-weight: 400 !important;
+	// fs-4 (1.5rem) reads oversized for a long-form paragraph; this is
+	// closer to a comfortable reading size for running text
+	font-size: 1.15rem !important;
+	line-height: 1.6;
+}
+
+.bluehighlight {
+	padding: 0rem 0.3rem;
+	background-color: rgba(0, 0, 255, 0.4) !important;
+	color: #fff !important;
+}
+
+.text-justify {
+	text-align: justify !important;
+}
+
+#biglogo {
+	position: relative;
+
+	&.hidden {
+		opacity: 0 !important;
+		margin-bottom: -500px !important;
+	}
+
+	transition: opacity 5s ease-out,
+	margin 5s ease-out !important;
+	margin: 0px !important;
+	opacity: 1 !important;
+}
+
+.navbar {
+	text-shadow: none !important;
+	background-color: rgba(0, 0, 0, 0.6) !important;
+	opacity: 1 !important;
+	backdrop-filter: blur(6px);
+	transition: top 2s ease-out, opacity 2s ease-out;
+
+	&.pushed {
+		top: -100px !important;
+		opacity: 0 !important;
+	}
+
+	.nav-link {
+		color: #eee;
+		text-align: center;
+		border-bottom: 1px solid rgba(0, 0, 0, 0);
+
+		&.active {
+			border-bottom: 1px solid $accent;
+		}
+	}
+}
+
+#langChangeButton {
+	filter: grayscale(100%);
+
+	&:hover {
+		filter: grayscale(0%);
+	}
+}
+
+#firstArrow {
+	transition: top 2s ease-out, opacity 2s ease-out;
+	bottom: 0px !important;
+	opacity: 1 !important;
+
+	&.pushed {
+		bottom: -100px !important;
+		opacity: 0 !important;
+	}
+}
+
+html,
+body {
+	text-shadow: #000 1px 1px 1px;
+	// every section is a full-bleed photo background; if content ever runs
+	// taller than expected, this keeps the gap dark instead of a white flash
+	background-color: #000;
+}
+
+// Then import Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";

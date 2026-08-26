@@ -1,0 +1,26 @@
+{
+  "name": "jkbb-website",
+  "version": "1.0.0",
+  "description": "chrusts band website",
+  "homepage": "https://github.com/pogan/chrust-website#readme",
+  "bugs": {
+    "url": "https://github.com/pogan/chrust-website/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pogan/chrust-website.git"
+  },
+  "license": "ISC",
+  "author": "Karol Konop",
+  "type": "commonjs",
+  "main": "chrust-website-app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node jkbb-website-express-app.js"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {}
+}
