@@ -10,6 +10,7 @@ app.get('/', function(req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
-app.listen(3001,()=>{
-	console.log('jkbb-website-app listening at 3001 from ',__dirname);
+const PORT = process.env.PORT || 3001;
+app.listen(PORT,()=>{
+	console.log('jkbb-website-app listening at '+PORT+' from ',__dirname);
 });
