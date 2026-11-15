@@ -1,19 +1,19 @@
 {
   "name": "jkbb-website",
   "version": "1.0.0",
-  "description": "chrusts band website",
-  "homepage": "https://github.com/pogan/chrust-website#readme",
+  "description": "Strona Jan Konop Big Band (bigband.konop.pl)",
+  "homepage": "https://bigband.konop.pl",
   "bugs": {
-    "url": "https://github.com/pogan/chrust-website/issues"
+    "url": "https://github.com/pogan/jkbb-website/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pogan/chrust-website.git"
+    "url": "git+https://github.com/pogan/jkbb-website.git"
   },
   "license": "ISC",
   "author": "Karol Konop",
   "type": "commonjs",
-  "main": "chrust-website-app.js",
+  "main": "jkbb-website-express-app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node jkbb-website-express-app.js"
