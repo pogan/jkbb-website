@@ -22,7 +22,7 @@
     "bootstrap": "^5.3.8",
     "ejs": "^7.0.2",
     "express": "^5.2.1",
-    "vamude-kit": "https://github.com/pogan/vamude-kit/archive/1fe591b4bb21fcf33986c1c65116eefa2e331dcc.tar.gz"
+    "vamude-kit": "https://github.com/pogan/vamude-kit/archive/refs/tags/v1.0.0.tar.gz"
   },
   "engines": {
     "node": ">=20.19"
