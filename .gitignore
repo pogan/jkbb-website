@@ -8,5 +8,8 @@ source_materials/
 public/video/*
 .env
 .env.*
+!.env.example
 logs/
 *.log
+# Baza statystyk odwiedzin (vamude-kit)
+data/
