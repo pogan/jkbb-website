@@ -1,8 +1,8 @@
 const path = require('path');
 const express = require('express');
-const { readVersion, healthz, createStats } = require('vamude-kit');
+const { readVersion, healthz, createStats, createAdmin } = require('vamude-kit');
 
-// .env jest opcjonalny (PORT, HOST, STATS_PASSWORD, STATS_DB).
+// .env: PORT, HOST, STATS_DB, GOOGLE_CLIENT_ID, ADMIN_EMAILS (panel /kierownik).
 try {
 	process.loadEnvFile(path.join(__dirname, '.env'));
 } catch {
@@ -18,10 +18,14 @@ app.set('views', path.join(__dirname, 'views'));
 const version = readVersion({ root: __dirname });
 app.locals.appVersion = version;
 
-// Statystyki odwiedzin (vamude-kit): panel /stats, hasło STATS_PASSWORD z .env.
+// Panel administratora /kierownik (logowanie Google, ADMIN_EMAILS) i statystyki
+// odwiedzin pod /kierownik/stats (vamude-kit).
 const stats = createStats({ file: process.env.STATS_DB || path.join(__dirname, 'data', 'stats.sqlite') });
+const admin = createAdmin({ stats });
+app.use(admin.middleware);
 app.use(stats.middleware);
 app.use(stats.panel);
+app.use(admin.router);
 
 app.get('/healthz', healthz({ version, checks: { stats: () => stats.db.prepare('SELECT 1').get() } }));
 
