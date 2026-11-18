@@ -20,7 +20,7 @@ The site is a scrolling, section-based "digital business card" for the band, ser
 ## Tech stack
 
 - **Backend**: [Express 5](https://expressjs.com/) (`jkbb-website-express-app.js`) on port 3001 — renders the single page from `views/index.ejs` (EJS, used only for the footer: current year and app version) and serves static files from `public/`.
-- **[vamude-kit](https://github.com/pogan/vamude-kit)**: `/healthz` (status, version, commit), app version in the footer, and first-party visit statistics in SQLite (`data/stats.sqlite`, no cookies, bots counted separately) with a password-protected panel at `/stats` (`STATS_PASSWORD` in `.env`).
+- **[vamude-kit](https://github.com/pogan/vamude-kit)**: `/healthz` (status, version, commit), app version in the footer, and first-party visit statistics in SQLite (`data/stats.sqlite`, no cookies, bots counted separately) with the panel at `/kierownik/stats` for admins signed in at `/kierownik` (Google, `ADMIN_EMAILS` and `GOOGLE_CLIENT_ID` in `.env`).
 - **Frontend**: plain HTML/CSS/vanilla JS — no frontend framework or bundler. All interactivity (section navigation, keyboard scrolling, video carousel controls, language toggle, responsive card-title auto-sizing) is hand-written in a single inline `<script>` block in `index.html`.
 - **Styling**: [Bootstrap 5.3.8](https://getbootstrap.com/) — the Sass source is pulled in via the npm package and customized through variable overrides in `src/main.scss` (brand colors, typography, disabled rounding/dark-mode), then compiled to the checked-in `public/main.css` (with source map). Bootstrap's JS bundle itself is loaded from a CDN with a Subresource Integrity hash rather than bundled, keeping the deployed payload small.
 - **Fonts**: Google Fonts (Montserrat), loaded with `preconnect` hints.
@@ -58,7 +58,7 @@ npm install
 npm start
 ```
 
-This starts the Express server on `http://localhost:3001`. No environment variables are required; optional ones are listed in `.env.example` (`STATS_PASSWORD` enables the statistics panel at `/stats`). Run `npm test` for the smoke tests.
+This starts the Express server on `http://localhost:3001`. No environment variables are required; optional ones are listed in `.env.example` (`GOOGLE_CLIENT_ID` and `ADMIN_EMAILS` enable the admin panel at `/kierownik`, statistics at `/kierownik/stats`). Run `npm test` for the smoke tests.
 
 If you change `src/main.scss`, recompile it to `public/main.css` with any Sass compiler (e.g. `npx sass src/main.scss public/main.css`); there is currently no dedicated build script wired into `package.json` for this step.
 
